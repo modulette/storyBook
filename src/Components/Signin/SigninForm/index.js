@@ -1,6 +1,6 @@
 import React from 'react';
-import StandardInput  from '../../../Atoms/Forms/TextInputField';
-import ModuletteButton  from '../../../Atoms/StandardButton';
+import StandardInput from '../../../Atoms/Forms/TextInputField';
+import ModuletteButton from '../../../Atoms/StandardButton';
 import styled from 'styled-components';
 
 const SubmitButton = styled(ModuletteButton)`
@@ -28,19 +28,44 @@ class SigninForm extends React.Component {
             email: '',
             password: ''
         };
-    
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-      }
-      handleChange(event) {
+    }
+    handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         });
-      }
-    
-      handleSubmit(event) {
+    }
+
+    handleSubmit(event) {
         event.preventDefault();
-      }
+        const pw = this.state.password;
+        this.hashPassword(pw)
+            .then(hash => {
+                console.log(this.hashToHex(hash));
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
+    hashPassword(str) {
+        const encoder = new TextEncoder();
+        const pwArrayBuffer = encoder.encode(str);
+        return window.crypto.subtle.digest('SHA-256', pwArrayBuffer)
+    }
+
+    hashToHex(buff) {
+        const byteArray = new Uint8Array(buff);
+        const hexCodes = [...byteArray].map(value => {
+            const hexCode = value.toString(16);
+            const paddedHexCode = hexCode.padStart(2, '0');
+            return paddedHexCode;
+        });
+        return hexCodes.join('');
+    }
+    
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
