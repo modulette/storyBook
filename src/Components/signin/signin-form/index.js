@@ -1,9 +1,9 @@
-import React from './node_modules/react';
+import React from 'react';
 import StandardInput from '../../../atoms/forms/textinput-field';
 import ModuletteButton from '../../../atoms/standard-button';
-import styled from './node_modules/styled-components';
+import styled from 'styled-components';
 import crypto from '../../../utils/crypto';
-import axios from './node_modules/axios';
+import axios from 'axios';
 
 const SubmitButton = styled(ModuletteButton)`
     margin-top: 10px;

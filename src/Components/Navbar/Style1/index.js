@@ -1,6 +1,6 @@
-import React from './node_modules/react';
+import React from 'react';
 import NavbarContainer from '../../../Atoms/Navbar'
-import styled from './node_modules/styled-components';
+import styled from 'styled-components';
 import { Row, Col } from 'react-grid-system';
 
 const StyledRow = styled(Row)`

@@ -1,10 +1,10 @@
-import React from './node_modules/react';
+import React from 'react';
 import NavbarContainer from '../../../Atoms/Navbar'
-import styled from './node_modules/styled-components';
+import styled from 'styled-components';
 import { Row, Col } from 'react-grid-system';
-import { FontAwesomeIcon } from './node_modules/@fortawesome/react-fontawesome'
-import { faArrowLeft} from './node_modules/@fortawesome/free-solid-svg-icons';
-import { ButtonIcon } from './node_modules/react-rainbow-components/components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import { ButtonIcon } from 'react-rainbow-components/components';
 
 const StyledRow = styled(Row)`
     .logo {
