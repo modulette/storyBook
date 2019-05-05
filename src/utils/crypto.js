@@ -1,10 +1,10 @@
 export default {
-    hashPassword: function (str) {
+    hashPassword: (str) => {
         const encoder = new TextEncoder();
         const pwArrayBuffer = encoder.encode(str);
         return window.crypto.subtle.digest('SHA-256', pwArrayBuffer)
     },
-    hashToHex: function (buff) {
+    hashToHex: (buff) => {
         const byteArray = new Uint8Array(buff);
         const hexCodes = [...byteArray].map(value => {
             const hexCode = value.toString(16);
@@ -14,7 +14,7 @@ export default {
         return hexCodes.join('');
     },
 
-    strToArrBuff: function (str) {
+    strToArrBuff: (str) => {
         const b64 = window.atob(str);
         const buf = new ArrayBuffer(b64.length);
         const bufView = new Uint8Array(buf);
@@ -24,7 +24,7 @@ export default {
         return buf;
     },
 
-    importPublicKey: function (spki) {
+    importPublicKey: (spki) => {
         const binaryDer = this.strToArrBuff(spki);
         return window.crypto.subtle.importKey(
             "spki",
@@ -38,7 +38,7 @@ export default {
         );
     },
 
-    importPrivateKey: function (pkcs8) {
+    importPrivateKey: (pkcs8) => {
         const binaryDer = this.strToArrBuff(pkcs8);
         return window.crypto.subtle.importKey(
             "pkcs8",
@@ -54,7 +54,7 @@ export default {
         );
     },
 
-    encryptHash: async function (hash, spki) {
+    encryptHash: async (hash, spki) => {
         try {
             const key = await this.importPublicKey(spki)
             const iv = window.crypto.getRandomValues(new Uint8Array(12));
@@ -80,28 +80,22 @@ export default {
         }
     },
 
-    decryptHash: async function (vector, pkcs8, data) {
+    decryptHash: async (vector, pkcs8, data) => {
         try {
             const key = await this.importPrivateKey(pkcs8);
-            try {
-                const decrypted = await crypto.subtle.decrypt(
-                    {
-                        name: "RSA-OAEP",
-                        iv: vector
-                    },
-                    key,
-                    data
-                );
-                return decrypted;
-            }
-            catch (decryptError) {
-                console.log(decryptError)
-                Promise.reject(new Error(decryptError));
-            }
+            const decrypted = await crypto.subtle.decrypt(
+                {
+                    name: "RSA-OAEP",
+                    iv: vector
+                },
+                key,
+                data
+            );
+            return decrypted;
         }
-        catch (importError) {
-            console.log(importError)
-            Promise.reject(new Error(importError));
+        catch (err) {
+            console.log(err)
+            Promise.reject(new Error(err));
         }
     }
 };

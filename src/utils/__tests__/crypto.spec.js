@@ -1,7 +1,7 @@
 import crypto from '../crypto';
 import { testPW, testHash, publicKey, privateKey} from './fixtures';
 
-describe('Crypto utils', () => {
+describe('Crypto Utils', () => {
     let testIv;
     let encryptedHash;
 
