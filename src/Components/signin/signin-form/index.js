@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import api from '../../../utils/api';
+import crypto from '../../../utils/crypto';
 import StandardInput from '../../../atoms/forms/textinput-field';
 import ModuletteButton from '../../../atoms/standard-button';
-import styled from 'styled-components';
-import crypto from '../../../utils/crypto';
-import axios from 'axios';
 
 const SubmitButton = styled(ModuletteButton)`
     margin-top: 10px;
@@ -22,42 +22,40 @@ const PasswordForget = styled.span`
     padding-top: 19px;
 `;
 
-class SigninForm extends React.Component {
+class SigninForm extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: ''
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
+    state = {
+        email: '',
+        password: ''
     }
 
-    async handleSubmit(event) {
+    handleChange = (event)=> {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    }
+
+    handleSubmit = async (event)=>{
         event.preventDefault();
-        const pw = this.state.password;
-        const hash = await crypto.hashPassword(pw)
-        const spki = await axios.get('/nonce');
-        const encryption = await crypto.encryptHash(hash, spki);
-        axios.post('/login', encryption);
+        const { email, password } = this.state;
+        const hash = await crypto.hashPassword(password)
+        const spki = await api.getPublicKey();
+        const encryptedPW = await crypto.encryptHash(hash, spki);
+        await api.login({ email, auth: encryptedPW });
     }
 
     render() {
+        const { email, password } = this.state;
+        const { handleChange, handleSubmit } = this;
+
         return (
-            <form onSubmit={this.handleSubmit}>
-                <StandardInput name="email" type="text" width="100%" label="Email address" value={this.state.email} onChange={this.handleChange}></StandardInput>
-                <StandardInput name="password" type="password" width="100%" label="Password" value={this.state.password} onChange={this.handleChange}></StandardInput>
-                <SubmitButton glow width="100%" type="submit" mainColor="secondaryColor" textColor="lightText" label="Sign in" ></SubmitButton>
+            <form onSubmit={handleSubmit}>
+                <StandardInput name="email" type="text" label="Email address" value={email} onChange={handleChange} />
+                <StandardInput name="password" type="password" label="Password" value={password} onChange={handleChange} />
+                <SubmitButton glow width="100%" type="submit" mainColor="secondaryColor" textColor="lightText" label="Sign in" />
                 <PasswordForget>Forgot your password?</PasswordForget>
             </form>
         )
     }
 }
-export default SigninForm
+
+export default SigninForm;

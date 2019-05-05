@@ -13,7 +13,7 @@ const StyledInput = styled(Input)`
         border-color: ${props => props.theme.inputBorder};
         background-color: ${props => props.theme.inputColor};
         color: ${props => props.theme.darkText};
-        width: ${props => props.width};
+        width: ${props => props.width ?  props.width : '100%'};
         &:hover, :active, :focus {
             box-shadow: unset;
             border: 1px solid ${props => props.theme.inputBorderFocus};

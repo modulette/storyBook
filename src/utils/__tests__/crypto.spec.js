@@ -1,6 +1,8 @@
 import crypto from '../crypto';
 import { testPW, testHash, publicKey, privateKey} from './fixtures';
 
+// @TODO - add mock implementations to all of the methods that use dom APIs
+
 describe('Crypto Utils', () => {
     let testIv;
     let encryptedHash;
@@ -24,7 +26,7 @@ describe('Crypto Utils', () => {
             iv: expect.anything(),
         }));
     });
-    it('Should decrypt an encryption', async () => {
+    it('Should decrypt encrypted data', async () => {
         const decryption = await crypto.decryptHash(testIv, privateKey,encryptedHash)
         const hash = crypto.hashToHex(decryption)
         expect(hash).toEqual(testHash)
