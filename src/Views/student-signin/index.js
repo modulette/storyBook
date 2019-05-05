@@ -1,7 +1,7 @@
-import React from './node_modules/react';
+import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
-import { Card } from './node_modules/react-rainbow-components/components';
-import styled from './node_modules/styled-components';
+import { Card } from 'react-rainbow-components/components';
+import styled from 'styled-components';
 import StandardInput from '../../atoms/forms/textinput-field';
 import ModuletteButton from '../../atoms/standard-button';
 import NavbarStyle1 from '../../components/navbar/style1'

@@ -1,9 +1,9 @@
-import React from 'react';
-import StandardInput from '../../../Atoms/Forms/TextInputField';
-import ModuletteButton from '../../../Atoms/StandardButton';
-import styled from 'styled-components';
+import React from './node_modules/react';
+import StandardInput from '../../../atoms/forms/textinput-field';
+import ModuletteButton from '../../../atoms/standard-button';
+import styled from './node_modules/styled-components';
 import crypto from '../../../utils/crypto';
-import axios from 'axios';
+import axios from './node_modules/axios';
 
 const SubmitButton = styled(ModuletteButton)`
     margin-top: 10px;
@@ -48,7 +48,7 @@ class SigninForm extends React.Component {
         const encryption = await crypto.encryptHash(hash, spki);
         axios.post('/login', encryption);
     }
-    
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>

@@ -1,9 +1,9 @@
-import React from 'react';
-import SigninForm from '../../Components/Signin/SigninForm';
-import SigninHeader from '../../Components/Signin/SigninHeader';
-import SigninHero from '../../Components/Signin/SigninHero';
+import React from './node_modules/react';
+import SigninForm from '../../components/signin/signin-form';
+import SigninHeader from '../../components/signin/signin-header';
+import SigninHero from '../../components/signin/signin-hero';
 import { Container, Hidden, Row, Col } from 'react-grid-system';
-import styled from 'styled-components';
+import styled from './node_modules/styled-components';
 
 const Logo = styled.div`
     position: absolute;
@@ -25,8 +25,8 @@ class Signin extends React.Component {
     render() {
         return (
                 <Container fluid style={{ height: "100%" }}>
-                <Logo> 
-                <img src="/Tim.svg" alt="Tim" /> 
+                <Logo>
+                <img src="/Tim.svg" alt="Tim" />
                 <span>Modulette</span>
                 </Logo>
                     <Row align="center" style={{ height: "100%" }}>

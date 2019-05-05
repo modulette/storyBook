@@ -1,10 +1,10 @@
-import React from 'react';
+import React from './node_modules/react';
 import NavbarContainer from '../../../Atoms/Navbar'
-import styled from 'styled-components';
+import styled from './node_modules/styled-components';
 import { Row, Col } from 'react-grid-system';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-import { ButtonIcon } from 'react-rainbow-components/components';
+import { FontAwesomeIcon } from './node_modules/@fortawesome/react-fontawesome'
+import { faArrowLeft} from './node_modules/@fortawesome/free-solid-svg-icons';
+import { ButtonIcon } from './node_modules/react-rainbow-components/components';
 
 const StyledRow = styled(Row)`
     .logo {
@@ -37,8 +37,8 @@ class Navbar1 extends React.Component {
                     <Col sm={2} >
                         <img className="logo" alt="Logo" src="/Tim.svg"></img>
                         <span className="logoName">modulette</span>
-                    </Col> 
-                </StyledRow>              
+                    </Col>
+                </StyledRow>
             </NavbarContainer>
         )
     }

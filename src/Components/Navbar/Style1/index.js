@@ -1,6 +1,6 @@
-import React from 'react';
+import React from './node_modules/react';
 import NavbarContainer from '../../../Atoms/Navbar'
-import styled from 'styled-components';
+import styled from './node_modules/styled-components';
 import { Row, Col } from 'react-grid-system';
 
 const StyledRow = styled(Row)`
@@ -29,8 +29,8 @@ class Navbar1 extends React.Component {
                     </Col>
                     <Col>
                         {this.props.children}
-                    </Col>  
-                </StyledRow>              
+                    </Col>
+                </StyledRow>
             </NavbarContainer>
         )
     }

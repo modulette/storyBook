@@ -1,11 +1,10 @@
 export default {
-    hashPassword: (str) => {
+    hashPassword: function (str) {
         const encoder = new TextEncoder();
         const pwArrayBuffer = encoder.encode(str);
         return window.crypto.subtle.digest('SHA-256', pwArrayBuffer)
     },
-
-    hashToHex: (buff) => {
+    hashToHex: function (buff) {
         const byteArray = new Uint8Array(buff);
         const hexCodes = [...byteArray].map(value => {
             const hexCode = value.toString(16);
@@ -15,7 +14,7 @@ export default {
         return hexCodes.join('');
     },
 
-    strToArrBuff: (str) => {
+    strToArrBuff: function (str) {
         const b64 = window.atob(str);
         const buf = new ArrayBuffer(b64.length);
         const bufView = new Uint8Array(buf);
@@ -25,7 +24,7 @@ export default {
         return buf;
     },
 
-    importPublicKey: (spki) => {
+    importPublicKey: function (spki) {
         const binaryDer = this.strToArrBuff(spki);
         return window.crypto.subtle.importKey(
             "spki",
@@ -55,7 +54,7 @@ export default {
         );
     },
 
-    encryptHash: async (hash, spki) => {
+    encryptHash: async function (hash, spki) {
         try {
             const key = await this.importPublicKey(spki)
             const iv = window.crypto.getRandomValues(new Uint8Array(12));
@@ -81,22 +80,28 @@ export default {
         }
     },
 
-    decryptHash: async (vector, pkcs8, data) => {
+    decryptHash: async function (vector, pkcs8, data) {
         try {
             const key = await this.importPrivateKey(pkcs8);
-            const decrypted = await crypto.subtle.decrypt(
-                {
-                    name: "RSA-OAEP",
-                    iv: vector
-                },
-                key,
-                data
-            );
-            return decrypted;
+            try {
+                const decrypted = await crypto.subtle.decrypt(
+                    {
+                        name: "RSA-OAEP",
+                        iv: vector
+                    },
+                    key,
+                    data
+                );
+                return decrypted;
+            }
+            catch (decryptError) {
+                console.log(decryptError)
+                Promise.reject(new Error(decryptError));
+            }
         }
-        catch (err) {
-            console.log(err)
-            Promise.reject(new Error(err));
+        catch (importError) {
+            console.log(importError)
+            Promise.reject(new Error(importError));
         }
     }
 };
