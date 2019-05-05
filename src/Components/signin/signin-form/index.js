@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import api from '../../../utils/api';
 import crypto from '../../../utils/crypto';
@@ -22,40 +22,26 @@ const PasswordForget = styled.span`
     padding-top: 19px;
 `;
 
-class SigninForm extends Component {
+function SigninForm() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
 
-    state = {
-        email: '',
-        password: ''
-    }
-
-    handleChange = (event)=> {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    }
-
-    handleSubmit = async (event)=>{
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, password } = this.state;
         const hash = await crypto.hashPassword(password)
         const spki = await api.getPublicKey();
         const encryptedPW = await crypto.encryptHash(hash, spki);
         await api.login({ email, auth: encryptedPW });
     }
 
-    render() {
-        const { email, password } = this.state;
-        const { handleChange, handleSubmit } = this;
-
-        return (
-            <form onSubmit={handleSubmit}>
-                <StandardInput name="email" type="text" label="Email address" value={email} onChange={handleChange} />
-                <StandardInput name="password" type="password" label="Password" value={password} onChange={handleChange} />
-                <SubmitButton glow width="100%" type="submit" mainColor="secondaryColor" textColor="lightText" label="Sign in" />
-                <PasswordForget>Forgot your password?</PasswordForget>
-            </form>
-        )
-    }
+    return (
+        <form onSubmit={handleSubmit}>
+            <StandardInput name="email" type="text" label="Email address" value={email} onChange={e => setEmail(e.target.value)} />
+            <StandardInput name="password" type="password" label="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            <SubmitButton glow width="100%" type="submit" mainColor="secondaryColor" textColor="lightText" label="Sign in" />
+            <PasswordForget>Forgot your password?</PasswordForget>
+        </form>
+    )
 }
 
 export default SigninForm;
