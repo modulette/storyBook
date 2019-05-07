@@ -21,8 +21,7 @@ const Logo = styled.div`
     }
 }
 `;
-class Signin extends React.Component {
-    render() {
+function Signin(props) {
         return (
                 <Container fluid style={{ height: "100%" }}>
                 <Logo>
@@ -44,5 +43,4 @@ class Signin extends React.Component {
                 </Container>
         )
     }
-}
 export default Signin;

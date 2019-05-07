@@ -6,7 +6,7 @@ const defaultHeaders = {
 };
 
 export default {
-  getPublicKey: () => axios.get(`${host}/api/token`),
+  getPublicKey: () => axios.get(`${host}/token`),
   login: (loginBody) => axios.post(`${host}/api/users/login`, loginBody)
 }
 
