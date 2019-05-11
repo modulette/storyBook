@@ -2,9 +2,9 @@ import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { Card } from 'react-rainbow-components/components';
 import styled from 'styled-components';
-import StandardInput from '../../Atoms/Forms/TextInputField';
-import ModuletteButton from '../../Atoms/StandardButton';
-import NavbarStyle1 from '../../Components/Navbar/Style1'
+import StandardInput from '../../atoms/forms/textinput-field';
+import ModuletteButton from '../../atoms/standard-button';
+import NavbarStyle1 from '../../components/navbar/style1'
 
 
 const CheckInButton = styled(ModuletteButton)`

@@ -1,7 +1,7 @@
 import React from 'react';
-import SigninForm from '../../Components/Signin/SigninForm';
-import SigninHeader from '../../Components/Signin/SigninHeader';
-import SigninHero from '../../Components/Signin/SigninHero';
+import SigninForm from '../../components/signin/signin-form';
+import SigninHeader from '../../components/signin/signin-header';
+import SigninHero from '../../components/signin/signin-hero';
 import { Container, Hidden, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
 
@@ -21,12 +21,11 @@ const Logo = styled.div`
     }
 }
 `;
-class Signin extends React.Component {
-    render() {
+function Signin(props) {
         return (
                 <Container fluid style={{ height: "100%" }}>
-                <Logo> 
-                <img src="/Tim.svg" alt="Tim" /> 
+                <Logo>
+                <img src="/Tim.svg" alt="Tim" />
                 <span>Modulette</span>
                 </Logo>
                     <Row align="center" style={{ height: "100%" }}>
@@ -44,5 +43,4 @@ class Signin extends React.Component {
                 </Container>
         )
     }
-}
 export default Signin;

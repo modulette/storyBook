@@ -5,8 +5,8 @@ import { ButtonIcon } from 'react-rainbow-components/components';
 import { faSlidersH, faChalkboardTeacher} from '@fortawesome/free-solid-svg-icons';
 import { faBell} from '@fortawesome/free-regular-svg-icons';
 import { withKnobs, number } from '@storybook/addon-knobs';
-import NavbarStyle1 from './Style1';
-import NavbarStyle2 from './Style2';
+import NavbarStyle1 from './style1';
+import NavbarStyle2 from './style2';
 
 const space = number('Space', 8, { range: true, min: 0, max: 8, step: 1 });
 
