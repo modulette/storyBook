@@ -1,5 +1,5 @@
 import React from 'react';
-import NavbarContainer from '../../../Atoms/Navbar'
+import NavbarContainer from '../../../atoms/navbar'
 import styled from 'styled-components';
 import { Row, Col } from 'react-grid-system';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
