@@ -6,7 +6,7 @@ export default {
     lightText: "#FCFCFF",
     darkText: "#292933",
     subText: "#666A76",
-    pageColor: "#FCFCFF",
+    pageColor: "#FAFAF9",
     inputColor: "#f1f3f9",
     inputLabel: "#BBC4D1",
     inputLabelFocus: "#A4B1C1",

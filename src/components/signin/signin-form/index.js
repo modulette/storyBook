@@ -38,8 +38,8 @@ function SigninForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <StandardInput name="email" type="text" label="Email address" value={email} onChange={e => setEmail(e.target.value)} />
-            <StandardInput name="password" type="password" label="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            <StandardInput name="email" type="email" label="Email address" value={email} onChange={e => setEmail(e.target.value)} required />
+            <StandardInput name="password" type="password" label="Password" value={password} onChange={e => setPassword(e.target.value)} required />
             <SubmitButton glow width="100%" type="submit" mainColor="secondaryColor" textColor="lightText" label="Sign in" />
             <PasswordForget>Forgot your password?</PasswordForget>
         </form>
