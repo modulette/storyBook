@@ -28,8 +28,10 @@ function SigninForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const hash = await crypto.hashPassword(password)
-        const spki = await api.getPublicKey();
+        const [hash, spki] = await Promise.all([
+            crypto.hashPassword(password),
+            api.getPublicKey()
+        ]);
         const encryptedPW = await crypto.encryptHash(hash, spki);
         await api.login({ email, auth: encryptedPW });
     }
