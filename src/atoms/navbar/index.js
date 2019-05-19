@@ -7,6 +7,7 @@ const Bar = styled.div`
     background-color: white;
     box-shadow: 0px 0px 5px 0px #bbb8b8;
     padding: 20px 7%;
+    z-index: 99999;
     position: absolute;
 `;
 
