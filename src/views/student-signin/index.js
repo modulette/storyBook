@@ -20,8 +20,12 @@ const StyledForm = styled.form`
     text-align: center;
 `;
 
-const CardTitle = styled.h3`
-    padding: 3% 5%;
+const StyledCard = styled(Card)`
+    padding: 15px;
+    & h2 a {
+        text-decoration: none;
+        cursor: text;
+    }
 `;
 
 class StudentSignin extends React.Component {
@@ -31,24 +35,19 @@ class StudentSignin extends React.Component {
                 <NavbarStyle1></NavbarStyle1>
                 <Container style={{height: '100%'}}>
                     <Row style={{height: '100%'}} align="center">
-                        <Col>
-                            <Card>
+                        <Col style={{marginTop: '70px'}}>
+                            <StyledCard title='Student Sign in'>
                                 <Container>
-                                    <Row>
-                                        <Col>
-                                            <CardTitle>Student Sign In</CardTitle>
-                                        </Col>
-                                    </Row>
                                     <Row align="center">
                                         <Col>
                                             <StyledForm>
-                                                <StandardInput type="text" width="100%" label="Student ID Number"></StandardInput>
+                                                <StandardInput type="text" width="100%" label="Student ID Number" required ref={input => input && input.focus()}/>
                                                 <CheckInButton glow width="75%" type="submit" mainColor="secondaryColor" textColor="lightText" label="Check in" ></CheckInButton>
                                             </StyledForm>
                                         </Col>
                                     </Row>
                                 </Container>
-                            </Card>
+                            </StyledCard>
                         </Col>
                     </Row>
                 </Container>
